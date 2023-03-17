@@ -7,7 +7,8 @@ function bienvenidaYsaludo() {
     nombre = prompt("Díganos, ¿Cuál es su nombre?");
   }
   alert(`Un saludo ${nombre}, espero que tengas un buen día`);
-  console.log(`Nombre del cliente: ${nombre}`);
+  console.log(`Nombre del cliente: ${nombre.toUpperCase()}`);
+  return nombre;
 }
 
 function eleccionDeAuto() {
@@ -48,10 +49,6 @@ class Vehiculo {
     this.nombre = nombre;
     this.precio = precio;
     this.color = color;
-    this.vendido = false;
-  }
-  vender() {
-    this.vendido = true;
   }
 }
 
@@ -64,42 +61,57 @@ function listaDeAutos(eleccion) {
   const listaDeAutos = [vehiculo1, vehiculo2, vehiculo3, vehiculo4, vehiculo5];
 
   let vehiculo;
-  for (let i = 0; i < listaDeAutos.length; i++) {
+  for (let i = 0; i <= listaDeAutos.length; i++) {
     if (i == eleccion) {
-      vehiculo = listaDeAutos[i - 1];
+      vehiculo = listaDeAutos[eleccion - 1];
     }
   }
   return vehiculo;
 }
 
 function precioAuto(num) {
-  let precio;
-  alert(`El precio del vehículo es de $${num} dólares`);
-  return num;
+  let precioIva = num;
+  let iva = prompt(
+    "Antes de darle el auto, necesitamos hacerle una pregunta\n¿Usted es monotributista?\nResponda con SI o NO"
+  );
+  while (iva != "si" && iva != "no") {
+    iva = prompt(
+      "Antes de darle el auto, necesitamos hacerle una pregunta\n¿Usted es monotributista?\nResponda con SI o NO"
+    );
+  }
+
+  console.log(`Monotributista: ${iva.toUpperCase()}`);
+
+  if (iva == "si") {
+    alert("De acuerdo. Al ser monotributista, no se le aplicará el IVA");
+  } else if (iva == "no") {
+    alert("Muy bien, en este caso se le aplicará el IVA");
+    precioIva = precioIva * 1.21;
+  }
+
+  alert(`El precio del vehículo es de $${precioIva} dólares`);
+  return precioIva;
 }
 
-function colorDeAuto() {
-  let color = "gris";
+function colorDeAuto(colorDefault) {
+  let color;
   let opcionColor = prompt(
-    "¿Desea cambiar el color del auto? Responda con SI o NO\nEl color del vehiculo por defecto será " +
-      color +
-      "\nNo habrá coste por nueva pintura"
+    `¿Desea cambiar el color del auto? Responda con SI o NO\nEl color del vehiculo por defecto será ${colorDefault}\nNo habrá coste por nueva pintura`
   );
   while (opcionColor != "si" && opcionColor != "no") {
     opcionColor = prompt(
-      "¿Desea cambiar el color del auto? Responda con SI o NO\nEl color del vehiculo por defecto será " +
-        color +
-        "\nNo habrá coste por nueva pintura"
+      `¿Desea cambiar el color del auto? Responda con SI o NO\nEl color del vehiculo por defecto será ${colorDefault}\nNo habrá coste por nueva pintura`
     );
   }
   if (opcionColor == "si") {
     color = prompt("¿De qué color lo quiere su vehículo?");
-    while (color === "" || color == "gris") {
+    while (color === "" || color == colorDefault) {
       color = prompt("¿De qué color lo quiere su vehículo?");
     }
-    alert("Muy bien, el color del auto será " + color);
+    alert(`Muy bien, el color del auto será ${color}`);
   } else if (opcionColor == "no") {
-    alert("Muy bien, el color del auto será " + color + " por defecto");
+    color = colorDefault;
+    alert(`Muy bien, el color del auto será ${color} por defecto`);
   }
   return color;
 }
@@ -120,17 +132,22 @@ function retirarAuto() {
     alert("Muy bien, se le sumará el costo de envío al monto total");
     envio = 500;
   }
+  if (envio === 0) {
+    console.log(`Forma de retiro: ${opcion.toUpperCase()}`);
+  } else {
+    console.log(`Forma de retiro: ${opcion.toUpperCase()}`);
+  }
   return envio;
 }
 
 function montoTotal(costoVehiculo, costoEnvio) {
   let total = costoVehiculo + costoEnvio;
   let pago = prompt(
-    "El total a pagar sería $" + total + "\nPor favor abone aquí el dinero: "
+    `El total a pagar sería $${total}\nPor favor abone aquí el dinero: `
   );
   while (pago === "") {
     pago = prompt(
-      "El total a pagar sería $" + total + "\nPor favor abone aquí el dinero: "
+      `El total a pagar sería $${total}\nPor favor abone aquí el dinero: `
     );
   }
   let pagado = parseFloat(pago);
@@ -141,22 +158,39 @@ function montoTotal(costoVehiculo, costoEnvio) {
     console.log("Monto total abonado exitosamente");
   } else if (pagado < total) {
     alert(
-      "Lo lamento, el dinero no es suficiente para completar el pago. Por favor vuelva en otro momento"
+      "Lo lamento, el dinero no es suficiente para completar el pago. Por favor vuelva en otro momento, mantendremos sus datos guardados en caso de su regreso"
     );
     console.log("No se pudo completar el pago");
   } else if (pagado > total) {
     let cambio = pagado - total;
     alert(
-      "El pago es superior al monto total. Se le devolverá $" +
-        cambio +
-        " de cambio\n¡Muchas gracias por su compra!"
+      `El pago es superior al monto total. Se le devolverá $${cambio} de cambio\n¡Muchas gracias por su compra!`
     );
     console.log("Monto total abonado exitosamente");
   }
+  return total;
 }
 
+function info(nombre, datos) {
+  const datosGuardados = [];
+  datosGuardados.push(datos);
+  const buscarNombre = datosGuardados.find(
+    (cliente) => cliente.nombre == guardar
+  );
+  console.log(buscarNombre);
+}
+
+// class DatosCliente{
+//   constructor(nombre, vehiculo, precioVehiculo, colorVehiculo,){
+//     this.nombre = nombre;
+//     this.vehiculo = vehiculo;
+//     this.precioVehiculo = precioVehiculo;
+//     this.colorVehiculo = colorVehiculo;
+//   }
+// }
+
 //Inicio del simulador
-bienvenidaYsaludo();
+let nombreCliente = bienvenidaYsaludo();
 
 let opcionElegida = eleccionDeAuto();
 
@@ -168,10 +202,45 @@ console.log(`Ha seleccionado: ${vehiculoSeleccionado.nombre}`);
 
 console.log(`Precio del vehículo: $${precioDelAuto}`);
 
-// let colorElegido = colorDeAuto();
+let colorElegido = colorDeAuto(vehiculoSeleccionado.color);
 
-// console.log("Color del vehículo: " + colorElegido);
+console.log(`Color del vehículo: ${colorElegido.toUpperCase()}`);
 
-// let costoEnvio = retirarAuto();
+let costoEnvio = retirarAuto();
 
-// montoTotal(precioDelAuto, costoEnvio);
+let precioTotal = montoTotal(precioDelAuto, costoEnvio);
+
+//Registro de los datos del comprador
+const datosDeCompra = {
+  nombre: nombreCliente,
+  vehiculo: vehiculoSeleccionado.nombre,
+  precio: precioTotal,
+  color: colorElegido,
+};
+
+const compradores = [];
+compradores.push(datosDeCompra);
+
+let guardar = prompt(
+  `Para verificar que los datos del cliente hayan sido guardados exitosamente, por favor introduzca el nombre del cliente: ${datosDeCompra.nombre}\n(Debe escribirlo EXACTAMENTE igual)`
+);
+while (guardar != datosDeCompra.nombre) {
+  guardar = prompt(
+    `Para verificar que los datos del cliente hayan sido guardados exitosamente, por favor introduzca el nombre del cliente: ${datosDeCompra.nombre}\n(Debe escribirlo EXACTAMENTE igual)`
+  );
+}
+let nombreEncontrado = compradores.find((cliente) => cliente.nombre == guardar);
+console.log(nombreEncontrado);
+
+let guardadoSeguro = prompt(
+  `Para confirmar que realmente se hayan guardado los datos correctamente, por favor introduzca el vehiculo elegido por el mismo cliente: ${datosDeCompra.vehiculo}\n(Debe escribirlo EXACTAMENTE igual)`
+);
+while (guardadoSeguro != datosDeCompra.vehiculo) {
+  guardadoSeguro = prompt(
+    `Para confirmar que realmente se hayan guardado los datos correctamente, por favor introduzca el vehiculo elegido por el mismo cliente: ${datosDeCompra.vehiculo}\n(Debe escribirlo EXACTAMENTE igual)`
+  );
+}
+let vehiculoEncontrado = compradores.filter(
+  (cliente) => cliente.vehiculo == guardadoSeguro
+);
+console.log(vehiculoEncontrado);
