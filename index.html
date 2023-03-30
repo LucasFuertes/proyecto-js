@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script src="main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/estilo.css" />
+    <title>Tienda de vehículos online</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <p>Concesionaria "Legendary Cars"</p>
+        <ul class="options-navbar">
+          <li>PRIMERO</li>
+          <li>SEGUNDO</li>
+          <li>TERCERO</li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="contenedor" class="grid-contenedor"></main>
+
+    <form id="formulario">
+      <p>
+        Para poder comprar alguno de estos vehículos, necesitamos sus datos
+        personales. Por favor, complete el formulario a continuación:
+      </p>
+      <br />
+
+      <label for="nombre"> Ingrese su nombre y apellido: </label>
+      <input id="nombre" type="text" />
+      <br /><br />
+
+      <label for="dni"> Ingrese el número de su DNI: </label>
+      <input id="dni" type="text" />
+      <br /><br />
+
+      <label for="numero">
+        Ingrese el número de lista del vehiculo deseado:
+      </label>
+      <input id="auto" type="number" />
+      <br /><br />
+
+      <button id="eleccion">Enviar</button>
+    </form>
+
+    <div id="datos"></div>
+
+    <script src="./js/vehiculo.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
 </html>

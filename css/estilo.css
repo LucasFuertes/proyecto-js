@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  color: white;
+  background-color: black;
+}
+
+header {
+  font-weight: bold;
+  font-size: larger;
+  color: rgb(255, 255, 255);
+  background-color: rgb(127, 67, 183);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.options-navbar {
+  display: flex;
+  list-style-type: none;
+}
+
+.options-navbar li {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.grid-contenedor {
+  margin: 20px;
+  margin-left: 50px;
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+img {
+  border-radius: 16px;
+  width: 475px;
+  height: 250px;
+}
