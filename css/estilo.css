@@ -17,7 +17,6 @@ body {
 header {
   font-weight: bold;
   font-size: larger;
-  color: rgb(255, 255, 255);
   background-color: rgb(127, 67, 183);
 }
 
@@ -40,7 +39,6 @@ nav {
 .grid-contenedor {
   margin: 20px;
   margin-left: 50px;
-  color: white;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }

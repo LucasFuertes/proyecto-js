@@ -23,17 +23,21 @@
 
     <form id="formulario">
       <p>
-        Para poder comprar alguno de estos vehículos, necesitamos sus datos
-        personales. Por favor, complete el formulario a continuación:
+        ¡Bienvenido a la página web de la concesionaria "Legendary Cars"!
+        Actualmente se encuentra en construcción nuestra concesionaria. Mientras
+        tanto, creamos esta página para los compradores interesados en ver
+        alguno de nuestros vehículos disponibles. Si registra sus datos en el
+        siguiente formulario, ¡le daremos un descuento del 40% en la compra de
+        su primer vehículo! ¡Regístrese ahora!
       </p>
       <br />
 
       <label for="nombre"> Ingrese su nombre y apellido: </label>
-      <input id="nombre" type="text" />
+      <input id="nombre" type="text" required />
       <br /><br />
 
       <label for="dni"> Ingrese el número de su DNI: </label>
-      <input id="dni" type="text" />
+      <input id="dni" type="text" required />
       <br /><br />
 
       <label for="numero">
@@ -42,10 +46,10 @@
       <input id="auto" type="number" />
       <br /><br />
 
-      <button id="eleccion">Enviar</button>
+      <button>Enviar</button>
     </form>
 
-    <div id="datos"></div>
+    <div id="registrado"></div>
 
     <script src="./js/vehiculo.js"></script>
     <script src="./js/main.js"></script>
