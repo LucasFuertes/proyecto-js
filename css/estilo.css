@@ -9,17 +9,47 @@ html {
   font-family: "Roboto", sans-serif;
 }
 
-body {
-  color: white;
-  background-color: black;
-}
-
 header {
   font-weight: bold;
   font-size: larger;
   background-color: rgb(127, 67, 183);
 }
 
+.theme-dark {
+  background-color: black;
+  color: white;
+  box-shadow: 1px 1px 10px white;
+}
+
+.grid-contenedor {
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+.img-size {
+  width: 100%;
+  height: 250px;
+}
+
+.card-size {
+  width: 90%;
+  margin: 20px;
+  padding-top: 10px;
+  /* padding-right: 30px;
+  padding-left: 30px; */
+}
+
+.banner {
+  width: 100%;
+}
+
+/* body {
+  color: white;
+  background-color: black;
+} */
+/* 
 nav {
   display: flex;
   justify-content: space-between;
@@ -34,17 +64,4 @@ nav {
 .options-navbar li {
   margin-left: 20px;
   margin-right: 20px;
-}
-
-.grid-contenedor {
-  margin: 20px;
-  margin-left: 50px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-img {
-  border-radius: 16px;
-  width: 475px;
-  height: 250px;
-}
+} */

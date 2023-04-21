@@ -1,4 +1,4 @@
-let vehiculo = [
+const vehiculos = [
   {
     id: 1,
     nombre: "1.- Chevrolet Corvette C6",
@@ -42,3 +42,13 @@ let vehiculo = [
     img: "./images/bmw_m3_e46.jpg",
   },
 ];
+
+function guardarVehiculosLS(vehiculo) {
+  localStorage.setItem("vehiculos", JSON.stringify(vehiculo));
+}
+
+function cargarVehiculosLS() {
+  return JSON.parse(localStorage.getItem("vehiculos")) || [];
+}
+
+guardarVehiculosLS(vehiculos);
