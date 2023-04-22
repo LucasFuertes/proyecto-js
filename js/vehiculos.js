@@ -48,7 +48,7 @@ function guardarVehiculosLS(vehiculo) {
 }
 
 function cargarVehiculosLS() {
-  return JSON.parse(localStorage.getItem("vehiculos")) || [];
+  return JSON.parse(localStorage.getItem("vehiculos"));
 }
 
 guardarVehiculosLS(vehiculos);

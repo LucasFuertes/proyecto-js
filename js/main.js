@@ -18,8 +18,9 @@ function mostrarAutos() {
   document.getElementById("autos").innerHTML = salida;
 }
 
-function guardarRegistroCompra(vehiculo) {
-  localStorage.setItem("", JSON.stringify(vehiculo));
+function buscarAuto(id) {
+  const vehiculoElegido = cargarVehiculosLS();
+  return vehiculoElegido.find((auto) => auto.id === id);
 }
 
 function confirmar(id) {
@@ -37,76 +38,93 @@ function confirmar(id) {
     confirmButtonText: `¡Elijo éste!`,
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(`¡Muy bien!`, ``, "success");
+      Swal.fire({
+        title: `¡Genial!`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      seccionCompra(auto);
+      registrarDatos(auto);
     }
   });
 }
 
-function buscarAuto(id) {
-  const vehiculoElegido = cargarVehiculosLS();
-  return vehiculoElegido.find((auto) => auto.id === id);
+function seccionCompra(elegido) {
+  const autoElegido = elegido;
+  document.getElementById("autos").remove();
+
+  document.getElementById(
+    "p"
+  ).innerText = `Muchas gracias por elegir uno de nuestros vehículos. Ahora, debe escribir sus datos personales solicitados para registrarlo como cliente, junto al monto total del dinero en los campos de texto. Luego, oprima el botón "Enviar y comprar" y será acreedor de su nuevo vehículo`;
+
+  let eleccion = `<div class="card text-center theme-dark card-size">
+                    <img src="${elegido.img}" class="card-img-top img-size" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">${elegido.nombre}</h5>
+                      <ul>
+                        <li>Precio en dólares: $${elegido.precio}</li>
+                        <li>Color de fábrica: ${elegido.colorDefault}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div>
+                    <form id="form" class="formulario">
+                      <label for="nombre">Introduzca su nombre:</label>
+                      <input id="name" type="text" />
+                      <label for="documento">Introduzca su DNI:</label>
+                      <input id="dni" type="text" />
+                      <p>Presione el siguiente botón. Una vez que lo haga, los datos serán registrados en nuestras oficinas y su dinero será extraído de su cuenta bancaria</p>
+                      <button class="btn btn-primary">Comprar ($${elegido.precio})</button>
+                    </form>
+                  </div>`;
+
+  const compra = (document.getElementById("compra").innerHTML = eleccion);
 }
 
-// function datosCliente() {
-//   formulario.addEventListener("submit", (e) => {
-//     e.preventDefault();
+// function vehiculoComprado(elegido) {}
 
-//     const cliente = new Cliente(nombre.value, dni.value, auto.value);
+class Cliente {
+  constructor(nombre, dni) {
+    this.nombre = nombre;
+    this.dni = dni;
+  }
+}
 
-//     listaClientes.push(cliente);
+function registrarDatos(vehiculoElegido) {
+  const formulario = document.getElementById("form");
+  formulario.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-//     formulario.reset();
+    const nombre = document.getElementById("name");
+    const dni = document.getElementById("dni");
+    // const cliente = new Cliente(nombre.value, dni.value);
 
-/* Luego de haber agregado el nuevo objeto al array, se guarda dicho array dentro del localStorage con el uso de JSON, además de usar un console.log para mostrar por consola los datos guardados */
-// guardarDatos();
+    const datosCliente = [nombre.value, dni.value];
+    // datosCliente.push(cliente);
 
-/* Y para finalizar, se muestran nodos en el HTML con la información personal registrada.
-    Si bien el HTML se sobreescribe luego de registrar nuevos datos, en el localStorage seguirán 
-    persistiendo los datos anteriores */
-//     mostrarRegistro(cliente);
-//   });
-// }
+    const registroCompra = datosCliente.concat(vehiculoElegido);
 
-// function guardarDatos() {
-//   localStorage.setItem("clientes", JSON.stringify(listaClientes));
+    const listaCompradores = [];
+    listaCompradores.push(registroCompra);
 
-//   let list = JSON.parse(localStorage.getItem("clientes"));
+    localStorage.setItem("comprador", JSON.stringify(listaCompradores));
 
-//   console.log(list);
-// }
+    formulario.reset();
+    finalizar();
+  });
+}
 
-// function mostrarRegistro(datos) {
-//   const registrado = document.getElementById("registrado");
-//   registrado.innerHTML = `<h1>FELICIDADES</h1>
-//                           <p>Sus datos han sido registrados exitosamente</p>
-//                           <p>Nombre completo: ${datos.nombre}</p>
-//                           <p>DNI: ${datos.dni}</p>`;
-// }
+function finalizar() {
+  // document.getElementById("compra").remove();
+  let mensaje = `<h2>¡Felicidades!</h2>
+                <p>Haz terminado el simulador con éxito. Si deseas repetirlo, presiona "F5" para volver a ver la lista de vehiculos</p>`;
+  document.getElementById("despedida").innerHTML = mensaje;
+}
 
 /* Inicio del simulador */
 
 //Mostramos la lista de los vehiculos para escoger con la función "mostrarAutos();"
 mostrarAutos();
 
-//Creamos una clase para su posterior uso en la función siguiente
-// class Cliente {
-//   constructor(nombre, dni, vehiculoElegido) {
-//     this.nombre = nombre;
-//     this.dni = dni;
-//     this.vehiculoElegido = vehiculoElegido;
-//   }
-// }
-
-//También declaro un array para poder almacenar los objetos de la clase Cliente
-// const listaClientes = [];
-
-//Aquí implemento constantes globales para su posterior uso en distintas funciones
-// const formulario = document.getElementById("formulario");
-// const nombre = document.getElementById("nombre");
-// const dni = document.getElementById("dni");
-// const auto = document.getElementById("auto");
-
-/* Gracias al evento "submit", lo que hago aquí es recoger los valores enviados por el formulario, e instanciar
-un nuevo objeto de la clase Cliente con dichos valores recogidos, para luego agregar el objeto creado en el 
-array listaClientes por medio de la función ".push()" */
-// datosCliente();
+//Y declaramos un array para guardar los datos del cliente después
