@@ -82,8 +82,6 @@ function seccionCompra(elegido) {
   const compra = (document.getElementById("compra").innerHTML = eleccion);
 }
 
-// function vehiculoComprado(elegido) {}
-
 class Cliente {
   constructor(nombre, dni) {
     this.nombre = nombre;
@@ -98,10 +96,8 @@ function registrarDatos(vehiculoElegido) {
 
     const nombre = document.getElementById("name");
     const dni = document.getElementById("dni");
-    // const cliente = new Cliente(nombre.value, dni.value);
 
     const datosCliente = [nombre.value, dni.value];
-    // datosCliente.push(cliente);
 
     const registroCompra = datosCliente.concat(vehiculoElegido);
 
@@ -116,7 +112,6 @@ function registrarDatos(vehiculoElegido) {
 }
 
 function finalizar() {
-  // document.getElementById("compra").remove();
   let mensaje = `<h2>¡Felicidades!</h2>
                 <p>Haz terminado el simulador con éxito. Si deseas repetirlo, presiona "F5" para volver a ver la lista de vehiculos</p>`;
   document.getElementById("despedida").innerHTML = mensaje;
@@ -126,5 +121,3 @@ function finalizar() {
 
 //Mostramos la lista de los vehiculos para escoger con la función "mostrarAutos();"
 mostrarAutos();
-
-//Y declaramos un array para guardar los datos del cliente después
